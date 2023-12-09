@@ -7,11 +7,11 @@ plugins {
     kotlin("plugin.spring") version "1.9.20"
 }
 
-group = "abe.aoc"
+group = "io.github.abeguin.aoc"
 version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 configurations {
@@ -44,7 +44,7 @@ dependencyManagement {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "21"
+        jvmTarget = "17"
     }
 }
 

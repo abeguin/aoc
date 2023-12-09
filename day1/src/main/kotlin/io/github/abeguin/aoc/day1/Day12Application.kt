@@ -1,11 +1,11 @@
-package abe.aoc.day1
+package io.github.abeguin.aoc.day1
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class Day1Application
+class Day12Application
 
 fun main(args: Array<String>) {
-    runApplication<Day1Application>(*args)
+    runApplication<Day12Application>(*args)
 }
