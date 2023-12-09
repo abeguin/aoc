@@ -16,6 +16,12 @@ data class Round(
     val green: Int = 0,
 )
 
+data class Minimum(
+    var red: Int = 0,
+    var blue: Int = 0,
+    var green: Int = 0,
+)
+
 data class GameData(
     val id: Int,
     val rounds: Set<Round>
@@ -62,7 +68,6 @@ class GameLoader(
 
 }
 
-
 @Service
 class GameAnalyzer(val config: GameConfiguration) {
 
@@ -86,10 +91,37 @@ class GameAnalyzer(val config: GameConfiguration) {
     }
 }
 
+@Service
+class GameAnalyzerPart2(val config: GameConfiguration) {
+
+    private fun foundMinRequirements(rounds: Set<Round>): Minimum {
+        var minimum = Minimum()
+        rounds.forEach {
+            run {
+                minimum.red = if (it.red > minimum.red) it.red else minimum.red
+                minimum.blue = if (it.blue > minimum.blue) it.blue else minimum.blue
+                minimum.green = if (it.green > minimum.green) it.green else minimum.green
+            }
+        }
+        return minimum
+    }
+
+    fun analyze(games: Set<GameData>): Int {
+        return games.map {
+            run {
+                val min = foundMinRequirements(it.rounds)
+                min.blue * min.red * min.green
+
+            }
+        }.reduce { acc, i -> acc + i }
+    }
+}
+
 
 @Component
 class GameRunner(
     val analyzer: GameAnalyzer,
+    val analyzerPart2: GameAnalyzerPart2,
     val loader: GameLoader
 ) : CommandLineRunner {
 
@@ -97,7 +129,7 @@ class GameRunner(
 
     override fun run(vararg args: String?) {
         val games = loader.load()
-        val result = analyzer.analyze(games)
+        val result = analyzerPart2.analyze(games)
         logger.info("Result = $result")
     }
 }
