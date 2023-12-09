@@ -26,22 +26,9 @@ class DayOneParser {
     fun wordToNumberStr(line: String): String {
         var matches: ArrayList<OrderedNumber> = ArrayList()
 
-        var acc = line
         numbers.forEachIndexed { index, num ->
             val regex = Regex(num, option = RegexOption.IGNORE_CASE)
-            val m = regex.find(acc)
-            if (m != null) {
-                matches.add(
-                    OrderedNumber(
-                        representation = num,
-                        value = index,
-                        index = m.range.first
-                    )
-                )
-            }
-
-            /*
-            val m = regex.findAll(acc)
+            val m = regex.findAll(line)
             m.forEach { mm ->
                 matches.add(
                     OrderedNumber(
@@ -51,15 +38,23 @@ class DayOneParser {
                     )
                 )
             }
-             */
+        }
+
+        val regex = Regex("[0-9]")
+        val numericMatches = regex.findAll(line)
+        numericMatches.forEach { m ->
+            matches.add(
+                OrderedNumber(
+                    representation = m.value,
+                    value = m.value.toInt(),
+                    index = m.range.first
+                )
+            )
         }
 
         val sortedMatches = matches.sortedBy { it.index }
 
-        sortedMatches.forEach { it ->
-            acc = acc.replace(it.representation, "${it.value}", ignoreCase = true)
-        }
-        return acc
+        return sortedMatches.map { it.value }.joinToString(separator = "")
     }
 
 

@@ -22,7 +22,7 @@ class DayOneParserTest {
 
 
             // Then
-            assertEquals("1ioashodiah2", result)
+            assertEquals("12", result)
         }
 
         @Test
@@ -35,7 +35,20 @@ class DayOneParserTest {
 
 
             // Then
-            assertEquals("1ioashodiah2", result)
+            assertEquals("12", result)
+        }
+
+        @Test
+        fun `when eightthree then 83`() {
+            // Given
+            val input = "eighthree"
+
+            // When
+            val result = parser.wordToNumberStr(input)
+
+
+            // Then
+            assertEquals("83", result)
         }
     }
 
