@@ -46,7 +46,6 @@ class DayOneParserTest {
             // When
             val result = parser.wordToNumberStr(input)
 
-
             // Then
             assertEquals("83", result)
         }

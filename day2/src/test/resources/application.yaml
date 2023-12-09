@@ -1,0 +1,8 @@
+app:
+  game:
+    inputs: data.txt
+    configuration:
+      availableBlue: 10
+      availableRed: 10
+      availableGreen: 10
+
