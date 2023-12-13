@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: day2, part1
+aoc:
+  day1:
+    input_file: "data/day1.txt"
+  day2:
+    input_file: "data/day2.txt"
+    configuration:
+      availableBlue: 10
+      availableRed: 10
+      availableGreen: 10
